@@ -1,0 +1,62 @@
+---
+import Layout from "../../../../layouts/Layout.astro";
+---
+
+<Layout title="Map Timer Technical Writeup | Jack Kroll" description="Technical notes on the Apex Legends Map Timer client, widgets, backend, and caching strategy.">
+	<main class="bg-base-100">
+		<article class="mx-auto max-w-4xl px-4 py-12 md:px-8">
+			<a class="btn btn-ghost btn-sm mb-8" href="/projects/maptimer/">Back to Map Timer</a>
+			<div class="flex flex-wrap gap-2">
+				<span class="badge badge-primary badge-lg">WidgetKit</span>
+				<span class="badge badge-secondary badge-lg">Vapor</span>
+				<span class="badge badge-accent badge-lg">Cloudflare Tunnels</span>
+			</div>
+			<h1 class="mt-5 text-4xl font-bold leading-tight md:text-6xl">Map Timer technical writeup</h1>
+			<p class="mt-5 text-xl leading-9 text-base-content/75">
+				The core challenge was client and server fusion: keeping map data current without forcing the app or its widgets into constant network traffic.
+			</p>
+
+			<div class="mt-8 flex flex-wrap gap-3">
+				<a class="btn btn-primary" href="https://github.com/jackkroll/MapTimer" target="_blank" rel="noreferrer">App source code</a>
+				<a class="btn btn-outline" href="https://github.com/jackkroll/MapTimerServer" target="_blank" rel="noreferrer">Server source code</a>
+			</div>
+
+			<div class="prose prose-invert mt-10 max-w-none">
+				<h2>Purpose</h2>
+				<p>
+					Map Timer began as a basic Apex Legends map rotation client. Some maps are less desirable to play, rotations land at different times each day, and checking a website added too much friction. A widget made the information easier to keep nearby.
+				</p>
+
+				<h2>Client development</h2>
+				<p>
+					WidgetKit was a natural fit because standard map rotations are predictable and most of the desired information can be understood at a glance. Widgets can be pre-rendered ahead of time and placed on the home screen or lock screen.
+				</p>
+				<p>
+					The client leans on Apple components where possible to stay aligned with platform design, support light and dark appearances, handle nonstandard display types, and avoid custom UI that ages quickly.
+				</p>
+
+				<h2>Server development</h2>
+				<p>
+					The backend uses Vapor, a Swift server framework, so shared ideas and data structures can stay close to the app code. It is self-hosted on a Raspberry Pi and routed securely through Cloudflare Tunnels.
+				</p>
+
+				<h2>Client and server fusion</h2>
+				<p>
+					The app considered several caching strategies: requesting data every time, polling on an interval, expiring data with a best-by date, and comparing hashes. Hash comparison won because it reduces unnecessary data transfer while still telling the client whether stored schedules match the live schedule.
+				</p>
+			</div>
+
+			<div class="mt-10 overflow-x-auto rounded-box border border-base-300 bg-base-200 p-4">
+				<div class="min-w-[680px]">
+					<ul class="steps steps-vertical lg:steps-horizontal w-full">
+						<li class="step step-primary">Request schedule</li>
+						<li class="step step-primary">Fetch live hash</li>
+						<li class="step step-primary">Compare stored hash</li>
+						<li class="step step-primary">Update if stale</li>
+						<li class="step step-primary">Return schedule</li>
+					</ul>
+				</div>
+			</div>
+		</article>
+	</main>
+</Layout>

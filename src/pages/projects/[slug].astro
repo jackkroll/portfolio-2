@@ -1,0 +1,76 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { projects } from "../../data/projects";
+
+export function getStaticPaths() {
+	return projects.map((project) => ({
+		params: { slug: project.slug },
+		props: { project },
+	}));
+}
+
+const { project } = Astro.props;
+---
+
+<Layout title={`${project.title} | Jack Kroll`} description={project.summary}>
+	<main class="bg-base-100">
+		<section class="mx-auto max-w-6xl px-4 py-12 md:px-8">
+			<a class="btn btn-ghost btn-sm mb-8" href="/projects/">Back to projects</a>
+			<div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+				<article>
+					<div class="flex flex-wrap gap-2">
+						<span class="badge badge-primary badge-lg">{project.kicker}</span>
+						{project.tech.map((item) => <span class="badge badge-outline badge-lg">{item}</span>)}
+					</div>
+					<h1 class="mt-5 text-4xl font-bold leading-tight md:text-6xl">{project.title}</h1>
+					<p class="mt-5 max-w-3xl text-xl leading-9 text-base-content/75">{project.summary}</p>
+
+					<div class="prose prose-invert mt-8 max-w-none">
+						{project.description.map((paragraph) => <p>{paragraph}</p>)}
+					</div>
+				</article>
+
+				<aside class="grid content-start gap-5">
+					<div class="card bg-base-200 shadow-lg">
+						<div class="card-body">
+							<h2 class="card-title">Highlights</h2>
+							<ul class="mt-2 space-y-3">
+								{project.highlights.map((highlight) => (
+									<li class="rounded-box border border-base-300 bg-base-100 p-3 text-sm leading-6 text-base-content/75">{highlight}</li>
+								))}
+							</ul>
+						</div>
+					</div>
+
+					<div class="card bg-base-200 shadow-lg">
+						<div class="card-body">
+							<h2 class="card-title">Links</h2>
+							<div class="flex flex-wrap gap-2">
+								{project.links.map((link) => (
+									<a
+										class:list={["btn btn-sm", link.kind === "primary" ? "btn-primary" : "btn-outline"]}
+										href={link.href}
+										target={link.href.startsWith("http") ? "_blank" : undefined}
+										rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+									>
+										{link.label}
+									</a>
+								))}
+							</div>
+							{project.related && (
+								<div class="mt-4 border-t border-base-300 pt-4">
+									<p class="mb-2 text-sm font-semibold text-base-content/70">Related from the original sitemap</p>
+									<div class="flex flex-wrap gap-2">
+										{project.related.map((link) => (
+											<a class="badge badge-outline p-3" href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
+										))}
+									</div>
+								</div>
+							)}
+						</div>
+					</div>
+				</aside>
+			</div>
+		</section>
+	</main>
+</Layout>
