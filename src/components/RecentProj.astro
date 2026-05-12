@@ -1,0 +1,43 @@
+---
+import { featuredProjects } from "../data/projects";
+---
+
+<section id="featured" class="bg-base-200">
+    <div class="mx-auto max-w-6xl px-4 py-16 md:px-8">
+        <div class="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div>
+                <p class="text-sm font-semibold uppercase tracking-wide text-secondary">Featured work</p>
+                <h2 class="mt-2 text-3xl font-bold md:text-4xl">Recent and representative projects</h2>
+            </div>
+            <a class="btn btn-outline btn-sm" href="/projects/">Browse all</a>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-2">
+            {featuredProjects.map((project) => (
+                <article class="card bg-base-100 shadow-lg">
+                    <div class="card-body">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge badge-primary">{project.kicker}</span>
+                            {project.tech.slice(0, 2).map((item) => <span class="badge badge-outline">{item}</span>)}
+                        </div>
+                        <h3 class="card-title mt-3 text-2xl">{project.title}</h3>
+                        <p class="leading-7 text-base-content/75">{project.summary}</p>
+                        <div class="card-actions mt-3">
+                            <a class="btn btn-primary btn-sm" href={`/projects/${project.slug}/`}>Details</a>
+                            {project.links.slice(0, 1).map((link) => (
+                                <a
+                                    class="btn btn-outline btn-sm"
+                                    href={link.href}
+                                    target={link.href.startsWith("http") ? "_blank" : undefined}
+                                    rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+                                >
+                                    {link.label}
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                </article>
+            ))}
+        </div>
+    </div>
+</section>
