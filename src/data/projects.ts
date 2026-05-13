@@ -11,6 +11,7 @@ export type Project = {
   summary: string;
   description: string[];
   highlights: string[];
+  assets?: string[];
   tech: string[];
   links: ProjectLink[];
   related?: ProjectLink[];
@@ -21,9 +22,9 @@ export const projects: Project[] = [
   {
     slug: "labassistant",
     title: "Lab Assistant",
-    kicker: "Darkroom workflow timer",
+    kicker: "Modern Darkroom Timer",
     summary:
-      "A hands-free film development assistant that reduces timing stress during darkroom work.",
+      "A refreshed take on darkroom timers that tracks and organizes each step. ",
     description: [
       "Lab Assistant was created to make film development feel calmer and more exact. It replaces mental counting, glove-unfriendly phone timers, and aging darkroom tools with guided workflows that run step by step.",
       "The app supports timed operations, agitation reminders, dilution tools, chemical tracking, expiration checks, and iCloud sync for moving between phone and larger displays.",
@@ -31,9 +32,10 @@ export const projects: Project[] = [
     highlights: [
       "Hands-free workflow timers with operation and agitation steps.",
       "Chemical tracking and dilution tools for development sessions.",
-      "iCloud sync across Apple devices.",
+      "iCloud Sync",
     ],
-    tech: ["SwiftUI", "iCloud", "TabView", "NavigationStack"],
+    assets: ["/labassistant/1.png", "/labassistant/2.png", "/labassistant/3.png"],
+    tech: ["SwiftUI", "iCloud"],
     links: [
       {
         label: "Download on App Store",
@@ -50,9 +52,9 @@ export const projects: Project[] = [
   {
     slug: "hideandseek",
     title: "hide & seek",
-    kicker: "Location-based party game",
+    kicker: "Turn your city into a playground",
     summary:
-      "A real-world hide and seek app inspired by Jet Lag: The Game, built around shrinking search areas and multiplayer state.",
+      "A multiplayer iOS game that expands hide and seek onto a larger scale, displaying a progressively shrinking search radius",
     description: [
       "Built over summer 2025, hide & seek turns the world around a group into a playground. Seekers receive a randomized radius containing the hider; that radius shrinks and updates over time while the hider sees seeker locations more frequently.",
       "The project pushed deeper into custom navigation, multipeer state management, GameKit, and achievements.",
@@ -62,7 +64,8 @@ export const projects: Project[] = [
       "Precise seeker location view for the hider.",
       "GameKit-powered multiplayer and achievements.",
     ],
-    tech: ["SwiftUI", "GameKit", "Multipeer state", "Custom routing"],
+    assets: [],
+    tech: ["SwiftUI", "GameKit", "Multipeer state", "View Routing"],
     links: [
       {
         label: "Download on App Store",
@@ -91,6 +94,7 @@ export const projects: Project[] = [
       "One-time notifications for favorite maps.",
       "Client and server data checks using hashes to keep schedules fresh.",
     ],
+    assets: [],
     tech: ["WidgetKit", "Swift", "Vapor", "Cloudflare Tunnels"],
     links: [
       {
@@ -119,7 +123,7 @@ export const projects: Project[] = [
     summary:
       "A dead-simple counting app built to count large quantities without ads, clutter, or friction.",
     description: [
-      "Counter was the first app in the portfolio. It was designed as a straightforward tool: no ads, no distractions, just tap and keep count.",
+      "Counter was the first app in my portfolio. It was designed as a straightforward tool: no ads, no distractions, just tap and keep count.",
       "A later iOS 26 update added new features and modernized navigation while staying faithful to the workflow longtime users already knew.",
     ],
     highlights: [
@@ -127,6 +131,7 @@ export const projects: Project[] = [
       "Modernized navigation while preserving familiar behavior.",
       "Small, fast, and intentionally uncomplicated.",
     ],
+    assets: [],
     tech: ["SwiftUI", "iOS", "Navigation"],
     links: [
       {
@@ -156,6 +161,7 @@ export const projects: Project[] = [
       "Configuration and account protections documented in depth.",
       "PrintLater planning for delayed print workflows.",
     ],
+    assets: [],
     tech: ["OctoPrint", "PrusaLink", "Configuration design", "Dashboard UX"],
     links: [
       {
@@ -189,6 +195,7 @@ export const projects: Project[] = [
       "Dimmable camera view for less intrusive metering.",
       "Simple gesture-first interaction model.",
     ],
+    assets: [],
     tech: ["SwiftUI", "Camera", "Film photography"],
     links: [
       {
@@ -216,6 +223,7 @@ export const projects: Project[] = [
       "Model availability handling.",
       "Modern Apple visual language and HIG practice.",
     ],
+    assets: [],
     tech: ["SwiftUI", "Apple Intelligence", "Liquid Glass", "HIG"],
     links: [
       {
@@ -245,6 +253,7 @@ export const projects: Project[] = [
       "Digital sticker conversion workflow.",
       "No generative AI used in the making.",
     ],
+    assets: [],
     tech: ["Illustration", "iMessage stickers", "App Store"],
     links: [
       {
@@ -273,6 +282,7 @@ export const projects: Project[] = [
       "iCloud sync without extra accounts or third-party servers.",
       "Menu bar helper with at-a-glance status on iOS.",
     ],
+    assets: [],
     tech: ["SwiftUI", "iCloud", "macOS menu bar", "iOS"],
     links: [
       {

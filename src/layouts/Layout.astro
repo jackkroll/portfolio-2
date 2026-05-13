@@ -27,7 +27,7 @@ const {
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body class:list={["min-h-screen bg-base-100 text-base-content", bodyClass]}>
+	<body class:list={["flex min-h-screen flex-col bg-base-100 text-base-content", bodyClass]}>
 		<div class="navbar sticky top-0 z-30 border-b border-base-300/70 bg-base-100/90 px-4 backdrop-blur md:px-8">
 			<div class="navbar-start">
 				<a class="btn btn-ghost px-2 text-lg font-semibold" href="/">Jack Kroll</a>
@@ -38,7 +38,9 @@ const {
 				<a class="btn btn-primary btn-sm" href="https://github.com/jackkroll" target="_blank" rel="noreferrer">GitHub</a>
 			</nav>
 		</div>
-		<slot />
+		<div class="flex-1">
+			<slot />
+		</div>
 		{!hideFooter && (
 			<footer class="border-t border-base-300 bg-base-200">
 				<div class="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-8 text-sm text-base-content/70 md:flex-row md:items-center md:justify-between md:px-8">
