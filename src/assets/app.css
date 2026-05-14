@@ -47,3 +47,137 @@ html {
 body {
     margin: 0;
 }
+
+.prose {
+    color: color-mix(in oklch, var(--color-base-content) 76%, transparent);
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.prose > * + * {
+    margin-top: 1.25rem;
+}
+
+.prose :where(h1, h2, h3, h4) {
+    color: var(--color-base-content);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.prose h1 {
+    font-size: 2.25rem;
+}
+
+.prose h2 {
+    margin-top: 2.5rem;
+    font-size: 1.875rem;
+}
+
+.prose h3 {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+}
+
+.prose h4 {
+    margin-top: 1.75rem;
+    font-size: 1.25rem;
+}
+
+.prose :where(p, ul, ol, blockquote, pre, table) {
+    max-width: 72ch;
+}
+
+.prose a {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration-line: underline;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.18em;
+}
+
+.prose a:hover {
+    color: var(--color-secondary);
+}
+
+.prose :where(strong, b) {
+    color: var(--color-base-content);
+    font-weight: 700;
+}
+
+.prose :where(ul, ol) {
+    padding-left: 1.5rem;
+}
+
+.prose ul {
+    list-style: disc;
+}
+
+.prose ol {
+    list-style: decimal;
+}
+
+.prose li {
+    padding-left: 0.25rem;
+}
+
+.prose li + li {
+    margin-top: 0.5rem;
+}
+
+.prose :where(ul ul, ul ol, ol ul, ol ol) {
+    margin-top: 0.5rem;
+}
+
+.prose blockquote {
+    border-left: 0.25rem solid var(--color-primary);
+    color: color-mix(in oklch, var(--color-base-content) 86%, transparent);
+    font-style: italic;
+    padding: 0.25rem 0 0.25rem 1rem;
+}
+
+.prose code {
+    border: 1px solid var(--color-base-300);
+    border-radius: 0.35rem;
+    background: var(--color-base-200);
+    color: var(--color-base-content);
+    font-size: 0.9em;
+    padding: 0.12rem 0.35rem;
+}
+
+.prose pre {
+    overflow-x: auto;
+    border: 1px solid var(--color-base-300);
+    border-radius: 0.75rem;
+    background: var(--color-base-200);
+    padding: 1rem;
+}
+
+.prose pre code {
+    border: 0;
+    background: transparent;
+    padding: 0;
+}
+
+.prose hr {
+    border-color: var(--color-base-300);
+    margin: 2rem 0;
+}
+
+.prose table {
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+}
+
+.prose th,
+.prose td {
+    border: 1px solid var(--color-base-300);
+    padding: 0.65rem 0.8rem;
+    text-align: left;
+}
+
+.prose th {
+    background: var(--color-base-200);
+    color: var(--color-base-content);
+    font-weight: 700;
+}

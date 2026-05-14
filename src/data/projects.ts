@@ -14,7 +14,6 @@ export type Project = {
   assets?: string[];
   tech: string[];
   links: ProjectLink[];
-  related?: ProjectLink[];
   featured?: boolean;
 };
 
@@ -43,10 +42,6 @@ export const projects: Project[] = [
         kind: "primary",
       },
     ],
-    related: [
-      { label: "Support", href: "https://jackk.dev/projects/labassistant/support/" },
-      { label: "Privacy", href: "https://jackk.dev/projects/labassistant/privacy/" },
-    ],
     featured: true,
   },
   {
@@ -64,7 +59,7 @@ export const projects: Project[] = [
       "Precise seeker location view for the hider.",
       "GameKit-powered multiplayer and achievements.",
     ],
-    assets: [],
+    assets: ["/hideandseek/1.png", "/hideandseek/2.png", "/hideandseek/3.png"],
     tech: ["SwiftUI", "GameKit", "Multipeer state", "View Routing"],
     links: [
       {
@@ -72,10 +67,6 @@ export const projects: Project[] = [
         href: "https://apps.apple.com/us/app/hide-seek-play-anywhere/id6745705866",
         kind: "primary",
       },
-    ],
-    related: [
-      { label: "Support", href: "https://jackk.dev/projects/hideandseek/support/" },
-      { label: "Privacy", href: "https://jackk.dev/projects/hideandseek/privacy/" },
     ],
     featured: true,
   },
@@ -108,12 +99,6 @@ export const projects: Project[] = [
         kind: "secondary",
       },
     ],
-    related: [
-      { label: "App source", href: "https://github.com/jackkroll/MapTimer" },
-      { label: "Server source", href: "https://github.com/jackkroll/MapTimerServer" },
-      { label: "Support", href: "https://jackk.dev/projects/maptimer/support/" },
-      { label: "Privacy", href: "https://jackk.dev/projects/maptimer/privacy/" },
-    ],
     featured: false,
   },
   {
@@ -131,7 +116,7 @@ export const projects: Project[] = [
       "Modernized navigation while preserving familiar behavior.",
       "Small, fast, and intentionally uncomplicated.",
     ],
-    assets: [],
+    assets: ["/counter/1.png", "/counter/2.png", "/counter/3.png"],
     tech: ["SwiftUI", "iOS", "Navigation"],
     links: [
       {
@@ -139,10 +124,6 @@ export const projects: Project[] = [
         href: "https://apps.apple.com/us/app/counter-tallying-app/id1638375914",
         kind: "primary",
       },
-    ],
-    related: [
-      { label: "Support", href: "https://jackk.dev/projects/counter/support/" },
-      { label: "Privacy", href: "https://jackk.dev/projects/counter/privacy/" },
     ],
     featured: false,
   },
@@ -170,14 +151,6 @@ export const projects: Project[] = [
         kind: "primary",
       },
     ],
-    related: [
-      { label: "Accounts", href: "https://jackk.dev/projects/liminal/accounts/" },
-      { label: "Configuration", href: "https://jackk.dev/projects/liminal/config/" },
-      { label: "Contributing", href: "https://jackk.dev/projects/liminal/dev/" },
-      { label: "First-time notes", href: "https://jackk.dev/projects/liminal/first-time/" },
-      { label: "Printers", href: "https://jackk.dev/projects/liminal/printers/" },
-      { label: "PrintLater", href: "https://jackk.dev/projects/liminal/print-later/" },
-    ],
     featured: false,
   },
   {
@@ -203,11 +176,7 @@ export const projects: Project[] = [
         href: "https://apps.apple.com/us/app/minimal-light-meter/id6504420435",
         kind: "primary",
       },
-    ],
-    related: [
-      { label: "Support", href: "https://jackk.dev/projects/lightmeter/support/" },
-      { label: "Privacy", href: "https://jackk.dev/projects/lightmeter/privacy/" },
-    ],
+    ]
   },
   {
     slug: "recall",
@@ -223,7 +192,8 @@ export const projects: Project[] = [
       "Model availability handling.",
       "Modern Apple visual language and HIG practice.",
     ],
-    assets: [],
+    assets: ["/recall/1.png", "/recall/2.png", "/recall/3.png", "/recall/4.png",
+      "/recall/5.png", "/recall/6.png", "/recall/7.png"],
     tech: ["SwiftUI", "Apple Intelligence", "Liquid Glass", "HIG"],
     links: [
       {
@@ -231,11 +201,6 @@ export const projects: Project[] = [
         href: "https://apps.apple.com/us/app/recall-minimal-flashcards/id6756734270",
         kind: "primary",
       },
-    ],
-    related: [
-      { label: "Support", href: "https://jackk.dev/projects/recall/support/" },
-      { label: "Privacy", href: "https://jackk.dev/projects/recall/privacy/" },
-      { label: "Terms", href: "https://jackk.dev/projects/recall/terms/" },
     ],
     featured:true
   },
@@ -261,11 +226,7 @@ export const projects: Project[] = [
         href: "https://apps.apple.com/us/app/cosmic-chaos-alien-stickers/id6748267870",
         kind: "primary",
       },
-    ],
-    related: [
-      { label: "Support", href: "https://jackk.dev/projects/alienstickers/support/" },
-      { label: "Privacy", href: "https://jackk.dev/projects/alienstickers/privacy/" },
-    ],
+    ]
   },
   {
     slug: "batteryshare",
@@ -282,7 +243,7 @@ export const projects: Project[] = [
       "iCloud sync without extra accounts or third-party servers.",
       "Menu bar helper with at-a-glance status on iOS.",
     ],
-    assets: [],
+    assets: ["/batteryshare/1.png", "/batteryshare/2.png"],
     tech: ["SwiftUI", "iCloud", "macOS menu bar", "iOS"],
     links: [
       {
@@ -290,11 +251,6 @@ export const projects: Project[] = [
         href: "https://apps.apple.com/us/app/batteryshare-remote-sync/id6759878234",
         kind: "primary",
       },
-    ],
-    related: [
-      { label: "Support", href: "https://jackk.dev/projects/batteryshare/support/" },
-      { label: "Privacy", href: "https://jackk.dev/projects/batteryshare/privacy/" },
-      { label: "Terms", href: "https://jackk.dev/projects/batteryshare/terms/" },
     ],
   },
 ];
