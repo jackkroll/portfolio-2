@@ -1,0 +1,47 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../../../layouts/Layout.astro";
+import { projects } from "../../../../data/projects";
+
+export async function getStaticPaths() {
+	const projectBySlug = new Map(projects.map((project) => [project.slug, project]));
+	const pages = await getCollection("projectPages");
+
+	return pages.flatMap((entry) => {
+		const [slug, page] = entry.id.split("/");
+		const project = projectBySlug.get(slug);
+
+		if (!slug || !page || !project) return [];
+
+		return {
+			params: { slug, page },
+			props: { entry, project },
+		};
+	});
+}
+
+const { entry, project } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<Layout title={`${entry.data.title} | ${project.title} | Jack Kroll`} description={entry.data.description}>
+	<main class="bg-base-100">
+		<article class="mx-auto max-w-4xl px-4 py-12 md:px-8">
+			<div class="breadcrumbs text-sm">
+				<ul>
+					<li><a href="/">Home</a></li>
+					<li><a href="/projects/">Projects</a></li>
+					<li><a href={`/projects/${project.slug}/`}>{project.title}</a></li>
+					<li>{entry.data.title}</li>
+				</ul>
+			</div>
+
+			<h1 class="mt-5 text-4xl font-bold leading-tight md:text-6xl">{entry.data.title}</h1>
+			<p class="mt-5 text-xl leading-9 text-base-content/75">{entry.data.description}</p>
+
+			<div class="prose prose-invert mt-10 max-w-none">
+				<Content />
+			</div>
+		</article>
+	</main>
+</Layout>
