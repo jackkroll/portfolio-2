@@ -15,6 +15,7 @@ export type Project = {
   tech: string[];
   links: ProjectLink[];
   featured?: boolean;
+  relevancyDate: Date;
 };
 
 export const projects: Project[] = [
@@ -23,15 +24,16 @@ export const projects: Project[] = [
     title: "Lab Assistant",
     kicker: "Modern Darkroom Timer",
     summary:
-      "A refreshed take on darkroom timers that tracks and organizes each step. ",
+      "A refreshed take on darkroom timers that tracks and organizes each step",
     description: [
-      "Lab Assistant was created to make film development feel calmer and more exact. It replaces mental counting, glove-unfriendly phone timers, and aging darkroom tools with guided workflows that run step by step.",
-      "The app supports timed operations, agitation reminders, dilution tools, chemical tracking, expiration checks, and iCloud sync for moving between phone and larger displays.",
+      "A passion of mine is film photography, and when I go to develop my film, I remember feeling very overwhelmed during the process with so many things to keep track of. I created Lab Assistant as a way to reduce the mental load that is keeping track of exact timings, while still keeping great accuracy",
+      "Lab Assistant lets you keep the accuracy of using a timer, and get the benefits of step by step instructions that apps offer, while not having to worry about hastily setting timers through gloves during a time sensitive operation or losing accuracy while counting in your head."
     ],
     highlights: [
-      "Hands-free workflow timers with operation and agitation steps.",
-      "Chemical tracking and dilution tools for development sessions.",
-      "iCloud Sync",
+      "Create hands free workflows that automatically time everything",
+      "Use tools to easily calculate dilution",
+      "Track chemicals and see if they are expired",
+      "Sync via iCloud to create on your phone, and use on a larger display when you need",
     ],
     assets: ["/labassistant/1.png", "/labassistant/2.png", "/labassistant/3.png"],
     tech: ["SwiftUI", "iCloud"],
@@ -43,24 +45,25 @@ export const projects: Project[] = [
       },
     ],
     featured: true,
+    relevancyDate: new Date("2026-03-07")
   },
   {
     slug: "hideandseek",
     title: "hide & seek",
-    kicker: "Turn your city into a playground",
+    kicker: "make the world your playground",
     summary:
       "A multiplayer iOS game that expands hide and seek onto a larger scale, displaying a progressively shrinking search radius",
     description: [
-      "Built over summer 2025, hide & seek turns the world around a group into a playground. Seekers receive a randomized radius containing the hider; that radius shrinks and updates over time while the hider sees seeker locations more frequently.",
-      "The project pushed deeper into custom navigation, multipeer state management, GameKit, and achievements.",
+      "This was an app I developed over the summer of 2025. It was heavily inspired by Jet Lag: The Game",
+      "The seekers receive a randomized radius that the hider is somewhere within. This radius will shrink and randomly update every few minutes. The hider can see the precise locations of all hiders that updates a bit more frequently. The goal? Outmaneuver and outlast until the game is up."
     ],
     highlights: [
-      "Randomized seeker radius that updates throughout a match.",
-      "Precise seeker location view for the hider.",
-      "GameKit-powered multiplayer and achievements.",
+      "Powerful customization to play your way",
+      "Precise seeker location view for the hider",
+      "GameKit-powered multiplayer and achievements",
     ],
     assets: ["/hideandseek/1.png", "/hideandseek/2.png", "/hideandseek/3.png"],
-    tech: ["SwiftUI", "GameKit", "Multipeer state", "View Routing"],
+    tech: ["GameKit", "Multipeer State Management", "View Routing"],
     links: [
       {
         label: "Download on App Store",
@@ -68,7 +71,8 @@ export const projects: Project[] = [
         kind: "primary",
       },
     ],
-    featured: true,
+    featured: false,
+    relevancyDate: new Date("2025-08-06")
   },
   {
     slug: "maptimer",
@@ -77,13 +81,14 @@ export const projects: Project[] = [
     summary:
       "A glanceable Apex Legends map rotation client with widgets, notifications, and a Swift server backend.",
     description: [
+        "Apex Legends map rotation was at an interval that I found tough to mentally track, but I didn't want to visit a website each time I was even considering playing. The solution? Easily accessible widgets!",
       "Map Timer keeps Apex Legends players in the loop with easy-to-read widgets for the current map rotation.",
       "Users can set one-time notifications for favorite maps, while the app balances local schedule caching with live server validation.",
     ],
     highlights: [
-      "WidgetKit views for home screen and lock screen map awareness.",
-      "One-time notifications for favorite maps.",
-      "Client and server data checks using hashes to keep schedules fresh.",
+      "WidgetKit views to stay up to date without ever opening the app",
+      "One-time notifications for favorite maps",
+      "Automatic updates via custom server",
     ],
     assets: [],
     tech: ["WidgetKit", "Swift", "Vapor", "Cloudflare Tunnels"],
@@ -100,6 +105,7 @@ export const projects: Project[] = [
       },
     ],
     featured: false,
+    relevancyDate: new Date("2025-06-22")
   },
   {
     slug: "counter",
@@ -110,14 +116,15 @@ export const projects: Project[] = [
     description: [
       "Counter was the first app in my portfolio. It was designed as a straightforward tool: no ads, no distractions, just tap and keep count.",
       "A later iOS 26 update added new features and modernized navigation while staying faithful to the workflow longtime users already knew.",
+        "Due to its age and established user base, I have no plans to significantly overhaul the backend or UI"
     ],
     highlights: [
-      "Focused tallying experience with no ads or unnecessary features.",
-      "Modernized navigation while preserving familiar behavior.",
-      "Small, fast, and intentionally uncomplicated.",
+      "Focused tallying experience with no ads or unnecessary features",
+      "Haptics to confirm that each tally was recorded",
+      "Small, fast, and intentionally uncomplicated",
     ],
     assets: ["/counter/1.png", "/counter/2.png", "/counter/3.png"],
-    tech: ["SwiftUI", "iOS", "Navigation"],
+    tech: ["SwiftUI", "iOS", "SwiftData"],
     links: [
       {
         label: "Download on App Store",
@@ -126,6 +133,7 @@ export const projects: Project[] = [
       },
     ],
     featured: false,
+    relevancyDate: new Date("2026-01-15")
   },
   {
     slug: "liminal",
@@ -134,24 +142,25 @@ export const projects: Project[] = [
     summary:
       "A dashboard for managing OctoPrint and PrusaLink printers from one practical control surface.",
     description: [
-      "Liminal connects users with multiple 3D printers through one dashboard. It interfaces with OctoPrint-based Prusa Mk3s printers and modern PrusaLink-based Mk4 printers.",
-      "The surrounding writeups cover account design, configuration safety, first-time setup lessons, printer models, and delayed printing.",
+        "My robotics team was dealing with having to quickly manage prints and submit them to different printers, and this workflow could easily be converted to a dashboard.",
+      "Liminal connects users with multiple 3D printers through one dashboard. It interfaces with OctoPrint-based Prusa Mk3s printers and modern PrusaLink-based Mk4 printers."
     ],
     highlights: [
-      "Dashboard for mixed OctoPrint and PrusaLink environments.",
-      "Configuration and account protections documented in depth.",
-      "PrintLater planning for delayed print workflows.",
+      "Manage OctoPrint and PrusaLink printers",
+      "Manage accounts and many users",
+      "PrintLater for delayed print workflows",
     ],
     assets: [],
-    tech: ["OctoPrint", "PrusaLink", "Configuration design", "Dashboard UX"],
+    tech: ["OctoPrint", "PrusaLink","Python", "Flask"],
     links: [
-      {
+      /*{
         label: "Read overview",
         href: "/projects/liminal/",
         kind: "primary",
-      },
+      },*/
     ],
     featured: false,
+    relevancyDate: new Date("2024-06-01")
   },
   {
     slug: "lightmeter",
@@ -164,19 +173,20 @@ export const projects: Project[] = [
       "It supports fully custom ISO values for unusual or expired film stocks and a dimmable camera view for discreet metering.",
     ],
     highlights: [
-      "Fully custom ISO controls.",
-      "Dimmable camera view for less intrusive metering.",
-      "Simple gesture-first interaction model.",
+      "Fully custom ISO controls",
+      "Dimmable camera view for less intrusive metering",
+      "Simple gesture-first interaction model",
     ],
     assets: [],
-    tech: ["SwiftUI", "Camera", "Film photography"],
+    tech: ["AVFoundation", "Film photography"],
     links: [
       {
         label: "Available on App Store",
         href: "https://apps.apple.com/us/app/minimal-light-meter/id6504420435",
         kind: "primary",
       },
-    ]
+    ],
+    relevancyDate: new Date("2024-07-18")
   },
   {
     slug: "recall",
@@ -185,16 +195,16 @@ export const projects: Project[] = [
     summary:
       "A flashcard study app exploring Apple Intelligence integration and modern Apple interface patterns.",
     description: [
-      "Recall expands a traditional flashcard app with Apple Intelligence. It started as a study-heavy class companion and grew into a broader exploration of model availability, Liquid Glass adoption, and HIG-aligned interface design.",
+      "Recall expands a traditional flashcard app with Apple Intelligence and a seek UX.",
     ],
     highlights: [
-      "Apple Intelligence exploration for study workflows.",
-      "Model availability handling.",
-      "Modern Apple visual language and HIG practice.",
+      "Apple Intelligence exploration for study workflows",
+      "Model availability handling",
+      "Modern Apple visual language and HIG practices",
     ],
     assets: ["/recall/1.png", "/recall/2.png", "/recall/3.png", "/recall/4.png",
       "/recall/5.png", "/recall/6.png", "/recall/7.png"],
-    tech: ["SwiftUI", "Apple Intelligence", "Liquid Glass", "HIG"],
+    tech: ["SwiftUI", "Apple Intelligence", "Liquid Glass"],
     links: [
       {
         label: "Download on App Store",
@@ -202,46 +212,49 @@ export const projects: Project[] = [
         kind: "primary",
       },
     ],
-    featured:true
+    featured:true,
+    relevancyDate: new Date("2026-01-10")
   },
   {
     slug: "alienstickers",
     title: "Cosmic Chaos: Alien Stickers",
     kicker: "Hand-drawn iMessage stickers",
     summary:
-      "A collaborative hand-drawn sticker pack converted digitally without generative AI.",
+      "A collaborative hand-drawn sticker pack converted digitally without generative AI",
     description: [
-      "Cosmic Chaos: Alien Stickers was a collaboration with a friend. The stickers were hand drawn, digitally converted, and released as an App Store sticker pack.",
+      "Cosmic Chaos: Alien Stickers was a collaboration with a friend. The stickers were hand drawn, digitally converted, and released as an App Store sticker pack",
     ],
     highlights: [
-      "Hand-drawn source artwork.",
-      "Digital sticker conversion workflow.",
-      "No generative AI used in the making.",
+      "Hand-drawn source artwork",
+      "Digital sticker conversion workflow",
+      "No generative AI used in the making",
     ],
     assets: [],
-    tech: ["Illustration", "iMessage stickers", "App Store"],
+    tech: ["Illustration", "iMessage stickers"],
     links: [
       {
         label: "Download on App Store",
         href: "https://apps.apple.com/us/app/cosmic-chaos-alien-stickers/id6748267870",
         kind: "primary",
       },
-    ]
+    ],
+    relevancyDate: new Date("2025-08-13")
   },
   {
     slug: "batteryshare",
     title: "BatteryShare",
     kicker: "Remote battery sync",
     summary:
-      "An iCloud-based utility for checking a Mac's battery from an iPhone at a glance.",
+      "An iCloud-based utility for checking a Mac's battery from an iPhone at a glance",
     description: [
-      "BatteryShare syncs a Mac's charge level, charging state, and time remaining through iCloud so the latest status is available on an iPhone.",
-      "The Mac side runs as a lightweight menu bar app, while the iPhone side presents a clean dashboard with charging status, estimates, last sync time, and stale-sync reminders.",
+        "My Mac's battery often lasted so long I never got into the habit of charging it each night, but then I would go to class and see it was nearly dead.",
+        "BatteryShare syncs a Mac's charge level, charging state, and time remaining through iCloud so the latest status is available on an iPhone",
+        "The Mac side runs as a lightweight menu bar app, while the iPhone side presents a clean dashboard with charging status and available estimates",
     ],
     highlights: [
-      "Mac battery status visible from iPhone.",
-      "iCloud sync without extra accounts or third-party servers.",
-      "Menu bar helper with at-a-glance status on iOS.",
+      "Mac battery status visible from iPhone",
+      "iCloud sync without extra accounts or third-party servers",
+      "Menu bar helper with widgets on iOS",
     ],
     assets: ["/batteryshare/1.png", "/batteryshare/2.png"],
     tech: ["SwiftUI", "iCloud", "macOS menu bar", "iOS"],
@@ -252,6 +265,8 @@ export const projects: Project[] = [
         kind: "primary",
       },
     ],
+    featured: true,
+    relevancyDate: new Date("2026-04-30")
   },
 ];
 

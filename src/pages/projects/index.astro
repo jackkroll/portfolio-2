@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { projects } from "../../data/projects";
+
 ---
 
 <Layout title="Projects | Jack Kroll" description="All projects migrated from Jack Kroll's original portfolio.">
@@ -15,7 +16,7 @@ import { projects } from "../../data/projects";
 			</div>
 
 			<div class="mt-10 grid gap-5 h-full md:grid-cols-2 lg:grid-cols-3 ">
-				{projects.map((project) => (
+				{projects.sort((a,b) => b.relevancyDate.getTime() - a.relevancyDate.getTime()).map((project) => (
 					<article class="card bg-base-200 shadow-lg">
 						<div class="card-body">
 							<h2 class="card-title mt-2">{project.title}</h2>
