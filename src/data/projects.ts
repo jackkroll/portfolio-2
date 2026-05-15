@@ -193,7 +193,7 @@ export const projects: Project[] = [
     title: "Recall",
     kicker: "Minimal flashcards",
     summary:
-      "A flashcard study app exploring Apple Intelligence integration and modern Apple interface patterns.",
+      "A flashcard study app exploring Apple Intelligence and Liquid Glass",
     description: [
       "Recall expands a traditional flashcard app with Apple Intelligence and a seek UX.",
     ],
