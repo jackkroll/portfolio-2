@@ -1,0 +1,48 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+const formatPostDate = (date: Date) =>
+	date.toLocaleDateString("en-US", {
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	});
+
+const posts = (await getCollection("blogPosts")).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<Layout title="Blog | Jack Kroll" description="Writing from Jack Kroll about projects, software, and building things.">
+	<main class="bg-base-100">
+		<section class="mx-auto max-w-6xl px-4 py-16 md:px-8">
+			<div class="max-w-3xl">
+				<p class="text-sm font-semibold uppercase tracking-wide text-primary"></p>
+				<h1 class="mt-2 text-4xl font-bold md:text-6xl">Blog</h1>
+				<p class="mt-5 text-lg leading-8 text-base-content/70">
+					A place for my work that doesn't necessarily fit neatly into a "project"
+				</p>
+			</div>
+
+			{posts.length > 0 ? (
+				<div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+					{posts.map((post) => (
+						<article class="card bg-base-200 shadow-lg">
+							<div class="card-body">
+								<p class="text-sm font-semibold text-primary">{formatPostDate(post.data.date)}</p>
+								<h2 class="card-title mt-2">{post.data.title}</h2>
+								<p class="leading-7 text-base-content/70">{post.data.description}</p>
+								<div class="card-actions mt-4">
+									<a class="btn btn-primary btn-sm w-full" href={`/blog/${post.id}/`}>Read post</a>
+								</div>
+							</div>
+						</article>
+					))}
+				</div>
+			) : (
+				<div class="mt-10 rounded-box border border-base-300 bg-base-200 p-6 text-base-content/75">
+					<p>No posts yet.</p>
+				</div>
+			)}
+		</section>
+	</main>
+</Layout>

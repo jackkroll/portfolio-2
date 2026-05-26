@@ -268,6 +268,25 @@ export const projects: Project[] = [
     featured: true,
     relevancyDate: new Date("2026-04-30")
   },
+  {
+    slug: "herpatlas",
+    title: "Michigan HERP Atlas",
+    kicker: "Collaborative Enterprise Project",
+    summary:
+        "A multiplatform mobile app for the Michigan DNR",
+    description: [
+
+    ],
+    highlights: [
+
+    ],
+    assets: [],
+    tech: [],
+    links: [
+    ],
+    featured: true,
+    relevancyDate: new Date("2026-05-01")
+  }
 ];
 
 export const featuredProjects = projects.filter((project) => project.featured);
