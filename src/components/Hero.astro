@@ -1,7 +1,6 @@
 ---
 import { appStoreCount, projectCount } from "../data/projects";
 import { featuredProjects } from "../data/projects";
-import { Image } from 'astro:assets';
 import pfp from '../assets/pfp.webp'
 ---
 
@@ -10,11 +9,11 @@ import pfp from '../assets/pfp.webp'
         <main>
         <div class="max-w-2xl items-center">
             <figure class="">
-                <Image
+                <img
                     class="mask mask-squircle aspect-square w-48 md:w-64 lg:w-72"
-                    src={pfp}
-                    widths={[192, 256, 288, 384, 512, 576]}
-                    sizes="(min-width: 1024px) 18rem, (min-width: 768px) 16rem, 12rem"
+                    src={pfp.src}
+                    width={pfp.width}
+                    height={pfp.height}
                     alt="A black and white picture of Jack"
                     loading="eager"
                     fetchpriority="high"
