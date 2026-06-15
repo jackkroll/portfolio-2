@@ -293,6 +293,11 @@ export const featuredProjects = projects.filter((project) => project.featured);
 
 export const projectCount = projects.length;
 
+export const getProjectAppStoreAppId = (project: Project) =>
+  project.links
+    .map((link) => link.href.match(/\/id(\d+)(?:[/?#]|$)/)?.[1])
+    .find((appId): appId is string => Boolean(appId));
+
 export const appStoreCount = projects.filter((project) =>
   project.links.some((link) => link.href.includes("apps.apple.com")),
 ).length;

@@ -6,6 +6,7 @@ interface Props {
 	description?: string;
 	hideFooter?: boolean;
 	bodyClass?: string;
+	smartAppBannerAppId?: string;
 }
 
 const {
@@ -13,6 +14,7 @@ const {
 	description = "My portfolio of projects :)",
 	hideFooter = false,
 	bodyClass = "",
+	smartAppBannerAppId,
 } = Astro.props;
 ---
 
@@ -24,6 +26,7 @@ const {
 		<link rel="icon" href="/favicon.ico" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
 		<meta name="description" content={description} />
+		{smartAppBannerAppId && <meta name="apple-itunes-app" content={`app-id=${smartAppBannerAppId}`} />}
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
@@ -43,7 +46,7 @@ const {
 			<slot />
 		</div>
 		{!hideFooter && (
-			<footer class="sticky bottom-0 z-30 shrink-0 border-t border-base-300 bg-base-200">
+			<footer class="sticky bottom-0 z-30 hidden shrink-0 border-t border-base-300 bg-base-200 md:block">
 				<div class="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-8 text-sm text-base-content/70 md:flex-row md:items-center md:justify-between md:px-8">
 					<p>Made with 💜 by Jack</p>
 
