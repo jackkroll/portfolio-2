@@ -1,0 +1,98 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { formatFileSize, getSecureBoardRelease } from "../../../lib/secureboard-appcast";
+
+const release = getSecureBoardRelease();
+const { appName, version, build, minimumMacOS, downloadUrl, downloadFileName, fileSizeBytes, publishedLabel } = release;
+const fileSize = formatFileSize(fileSizeBytes);
+
+// Replace with "/projects/secureboard/icon.png" once the asset is added.
+const iconSrc: string | undefined = "/projects/secureboard/icon.png";
+
+// Add screenshot paths under public/projects/secureboard/ when ready.
+const screenshots: string[] = ["/projects/secureboard/1.png", "/projects/secureboard/2.png", "/projects/secureboard/3.png"];
+
+const description = [
+	"SecureBoard is a lightweight macOS menu bar application that allows users to easily access their recent clipboard contents through a simple command + shift + v press",
+	"Your data is securely stored using GCM cryptography which ensures the data is both hidden, and tamper proof. The key is securely stored in macOS keychain.",
+];
+---
+
+<Layout
+	title={`${appName} | Download for macOS`}
+	description={`Download ${appName} ${version} for macOS ${minimumMacOS} or later.`}
+>
+	<main class="bg-base-100">
+		<section class="mx-auto max-w-3xl px-4 py-8 text-center">
+			{iconSrc ? (
+				<img
+					class="mx-auto size-32 rounded-[22%] shadow-lg md:size-40 lg:size-75"
+					src={iconSrc}
+					alt={`${appName} icon`}
+					width={500}
+					height={500}
+				/>
+			) : (
+				<div
+					class="mx-auto flex size-32 items-center justify-center rounded-[22%] border-2 border-dashed border-base-300 bg-base-200 text-sm text-base-content/50 md:size-40"
+					aria-hidden="true"
+				>
+					App icon
+				</div>
+			)}
+
+			<h1 class="mt-8 text-3xl font-bold md:text-4xl">{appName}</h1>
+
+			<a class="btn btn-primary btn-lg mt-8" href={downloadUrl} download={downloadFileName}>
+				Download for macOS
+			</a>
+
+			<p class="mt-4 text-sm leading-6 text-base-content/60">
+				Version {version} ({build}) · macOS {minimumMacOS}+ · {fileSize} · Released {publishedLabel}
+			</p>
+		</section>
+
+		<section class="border-t border-base-300 bg-base-200/40">
+			<div class="mx-auto max-w-5xl px-4 py-16 md:px-8">
+				<h2 class="text-center text-2xl font-semibold">Screenshots</h2>
+
+				{screenshots.length > 0 ? (
+					<div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+						{screenshots.map((screenshot, index) => (
+							<img
+								class="w-full rounded-box border border-base-300 bg-base-100 shadow-sm"
+								src={screenshot}
+								alt={`${appName} screenshot ${index + 1}`}
+								loading="lazy"
+							/>
+						))}
+					</div>
+				) : (
+					<div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+						{[1, 2, 3].map((index) => (
+							<div
+								class="flex aspect-video items-center justify-center rounded-box border-2 border-dashed border-base-300 bg-base-100 text-sm text-base-content/50"
+								aria-hidden="true"
+							>
+								Screenshot {index}
+							</div>
+						))}
+					</div>
+				)}
+			</div>
+		</section>
+
+		<section class="mx-auto max-w-3xl px-4 py-16 md:px-8">
+			<h2 class="text-2xl font-semibold">About</h2>
+			<div class="prose prose-invert mt-6 max-w-none">
+				{description.map((paragraph) => (
+					<p>{paragraph}</p>
+				))}
+			</div>
+
+			<div class="mt-10 flex flex-wrap gap-3 text-sm">
+				<a class="link link-hover" href="/projects/secureboard/support/">Support</a>
+			</div>
+		</section>
+	</main>
+</Layout>
