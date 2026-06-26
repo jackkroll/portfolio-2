@@ -10,5 +10,14 @@
             <sparkle:minimumSystemVersion>26.5</sparkle:minimumSystemVersion>
             <enclosure url="https://jackk.dev/projects/secureboard/SecureBoard-1.dmg" length="7020917" type="application/octet-stream" sparkle:edSignature="dSo/N+L2SmCMNKzsxnFowORarmP0STClqO1ITB6DwxSAwVgpOUEoj7wZDJOkvJOb8+zVEZWjINvV5x4gaOVXDw=="/>
         </item>
+
+        <item>
+            <title>v1.1</title>
+            <pubDate>Thu, 26 Jun 2026 19:49:10 -0400</pubDate>
+            <sparkle:version>2</sparkle:version>
+            <sparkle:shortVersionString>1.1</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14</sparkle:minimumSystemVersion>
+            <enclosure url="https://jackk.dev/projects/secureboard/SecureBoard-2.dmg" length="10562093" type="application/octet-stream" sparkle:edSignature="J1y/5k0wsHL2d7LMpbwPpqxDl2qDxln6Q2i2XdLzoKCg1kGBeejy7+wbL4bNtdX1FmjEV3iq2BLfuiFRVxJ+BA=="/>
+        </item>
     </channel>
 </rss>
