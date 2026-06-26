@@ -1,0 +1,35 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { getSecureBoardRelease } from "../../../lib/secureboard-appcast";
+
+const { appName, minimumMacOS } = getSecureBoardRelease();
+---
+
+<Layout
+	title={`${appName} Support`}
+	description={`Get help with ${appName} for macOS.`}
+>
+	<main class="bg-base-100">
+		<article class="mx-auto max-w-4xl px-4 py-12 md:px-8">
+			<a class="btn btn-ghost btn-sm mb-8" href="/projects/secureboard/">Back to {appName}</a>
+
+			<h1 class="text-4xl font-bold leading-tight md:text-6xl">Support</h1>
+			<p class="mt-5 text-xl leading-9 text-base-content/75">
+				Running into an issue with install, updates, or day-to-day use? I am happy to help.
+			</p>
+
+			<div class="prose prose-invert mt-10 max-w-none">
+				<h2>Contact</h2>
+				<p>
+					Email <a href={`mailto:support@jackk.dev?subject=[${appName}]`}>support@jackk.dev</a> with a short description of the problem and your macOS version.
+				</p>
+
+				<h2>Before you write</h2>
+				<ul>
+					<li>Confirm you are on macOS {minimumMacOS} or later.</li>
+					<li>For update issues, try downloading the latest build from the <a href="/projects/secureboard/">downloads page</a>.</li>
+				</ul>
+			</div>
+		</article>
+	</main>
+</Layout>

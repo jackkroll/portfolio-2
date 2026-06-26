@@ -15,6 +15,7 @@ export type Project = {
   tech: string[];
   links: ProjectLink[];
   featured?: boolean;
+  customPage?: boolean;
   relevancyDate: Date;
 };
 
@@ -286,6 +287,33 @@ export const projects: Project[] = [
     ],
     featured: true,
     relevancyDate: new Date("2026-05-01")
+  },
+  {
+    slug: "secureboard",
+    title: "SecureBoard",
+    kicker: "Secure clipboard for macOS",
+    summary:
+      "A menu bar app for quick access to recent clipboard items, encrypted with GCM and stored in the macOS keychain.",
+    description: [
+      "SecureBoard is a lightweight macOS menu bar application that allows users to easily access their recent clipboard contents through a simple command + shift + v press.",
+      "Your data is securely stored using GCM cryptography which ensures the data is both hidden and tamper proof. The key is securely stored in macOS keychain.",
+    ],
+    highlights: [
+      "Open recent clipboard items with Command + Shift + V",
+      "GCM-encrypted storage with keys in the macOS keychain",
+      "Sparkle-powered updates",
+    ],
+    assets: [],
+    tech: ["macOS", "SwiftUI", "Sparkle"],
+    links: [
+      {
+        label: "Download",
+        href: "/projects/secureboard/",
+        kind: "primary",
+      },
+    ],
+    customPage: true,
+    relevancyDate: new Date("2026-06-25"),
   }
 ];
 
