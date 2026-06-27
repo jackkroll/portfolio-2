@@ -8,7 +8,10 @@
             <sparkle:version>2</sparkle:version>
             <sparkle:shortVersionString>1.1</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://jackk.dev/projects/secureboard/SecureBoard-2.dmg" length="3485086" type="application/octet-stream" sparkle:edSignature="GZ5eXdFZL8uakMo1hwil7+SYISAO10W7MGNHwnFLLNOQA7/0nuHJLOv2cKuliJY2zDL3L+qHrrOCjSKcRBI7Cw=="/>
+            <enclosure url="https://jackk.dev/projects/secureboard/SecureBoard-2.dmg" length="3527543" type="application/octet-stream" sparkle:edSignature="/YzSsJvR1ZPvFAMyBeRhVqzFEX0YZh7jGuziLEiyWng+2PsdymVD7SITBivqAuJU/9sCAm70hQvBXD5uQDLaDA=="/>
+            <sparkle:deltas>
+                <enclosure url="https://jackk.dev/projects/secureboard/SecureBoard2-1.delta" sparkle:deltaFrom="1" length="12354" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="975840" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="2GdWKNCbOUL8LbsRrt+BXuPdQPw4hnVgi+2SCg0t3MIRihGlZtEdScPEu+YE8L3mqStULvnY7JoW5sA7QCh3AA=="/>
+            </sparkle:deltas>
         </item>
         <item>
             <title>1.0</title>
@@ -16,7 +19,7 @@
             <sparkle:version>1</sparkle:version>
             <sparkle:shortVersionString>1.0</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://jackk.dev/projects/secureboard/SecureBoard-1.dmg" length="3487419" type="application/octet-stream" sparkle:edSignature="wb2OGwrkQLSaBeQyFPMLtAwAtCtm/38X68I7UiqzJV8xOjy6ZvS7eMM/EN7v9xtzToQycU4x37j/fyWh13LAAQ=="/>
+            <enclosure url="https://jackk.dev/projects/secureboard/SecureBoard-1.dmg" length="3527495" type="application/octet-stream" sparkle:edSignature="4nxKxCqN0ISzct2BikW8aLba0QOW/0nuw3sf+ioJtdKbEmcNixlplgUvF78E0mFBm4KjQYL0KD2xM9RzuhxCCA=="/>
         </item>
     </channel>
 </rss>
