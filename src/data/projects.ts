@@ -285,7 +285,7 @@ export const projects: Project[] = [
     tech: [],
     links: [
     ],
-    featured: true,
+    featured: false,
     relevancyDate: new Date("2026-05-01")
   },
   {
@@ -314,7 +314,26 @@ export const projects: Project[] = [
     ],
     customPage: true,
     relevancyDate: new Date("2026-06-25"),
-  }
+  },
+  {
+    slug: "postal",
+    title: "Postal",
+    kicker: "Coming Soon",
+    summary:
+        "A letter based app that routes through a realistic network",
+    description: [
+
+    ],
+    highlights: [
+
+    ],
+    assets: [],
+    tech: [],
+    links: [
+    ],
+    featured: true,
+    relevancyDate: new Date("2026-05-01")
+  },
 ];
 
 export const featuredProjects = projects.filter((project) => project.featured);
