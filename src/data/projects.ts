@@ -317,7 +317,7 @@ export const projects: Project[] = [
   },
   {
     slug: "postal",
-    title: "Postal",
+    title: "Penpal",
     kicker: "Coming Soon",
     summary:
         "A letter based app that routes through a realistic network",
@@ -332,7 +332,7 @@ export const projects: Project[] = [
     links: [
     ],
     featured: true,
-    relevancyDate: new Date("2026-05-01")
+    relevancyDate: new Date("2026-08-29")
   },
 ];
 

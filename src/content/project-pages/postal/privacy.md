@@ -6,7 +6,7 @@ showReadingTime: False
 showAuthor: False
 ---
 ### Introduction and Definition
-This Privacy Policy sets out how we, Postal, use and protect your personal data that you provide to us, or that is otherwise obtained or generated in connection with your use of Postal (the “Services”). For the purposes of this Privacy Policy, “we”, “us”, and “our” refer to Postal, and “you” refers to you, the user of the Services.
+This Privacy Policy sets out how we, Penpal, use and protect your personal data that you provide to us, or that is otherwise obtained or generated in connection with your use of Penpal (the “Services”). For the purposes of this Privacy Policy, “we”, “us”, and “our” refer to Penpal, and “you” refers to you, the user of the Services.
 
 ### Principles
 We follow simple principles when it comes to your data:
@@ -16,7 +16,7 @@ We follow simple principles when it comes to your data:
 - Any purchases are handled entirely by Apple
 
 ### Information you provide
-Data associated with your usage of Postal, including purchases is collected.
+Data associated with your usage of Penpal, including purchases is collected.
 
 Subscriptions and payments are processed by Apple using your Apple ID. We do not have access to your payment information, Apple ID, or any personal data associated with purchases.
 
@@ -27,13 +27,13 @@ Subscriptions and payments are processed by Apple using your Apple ID. We do not
 We do not share any information at any time.
 
 ### Third-Party Services
-Postal uses Apple’s in-app purchase system to provide subscriptions. Any data related to purchases is handled by Apple in accordance with Apple’s Privacy Policy.
-Postal utilizes RevenueCat's systems for paywall presentation and virtual currency management. 
+Penpal uses Apple’s in-app purchase system to provide subscriptions. Any data related to purchases is handled by Apple in accordance with Apple’s Privacy Policy.
+Penpal utilizes RevenueCat's systems for paywall presentation and virtual currency management. 
 
 ### Updates
 This Privacy Policy may be updated from time to time to ensure it remains accurate, current, and clear. Any updates will be reflected in this document.
 
 ### Contact Us
-If you have questions about this Privacy Policy, please contact [support@jackk.dev](mailto:support@jackk.dev?subject=[Postal])
+If you have questions about this Privacy Policy, please contact [support@jackk.dev](mailto:support@jackk.dev?subject=[Penpal])
 
 Effective as of August 29th, 2026
