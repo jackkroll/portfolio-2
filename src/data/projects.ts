@@ -322,13 +322,16 @@ export const projects: Project[] = [
     summary:
         "A letter based app that routes through a realistic network",
     description: [
-
+        "Penpal is a unique way to stay up to date with your friends and loved ones. It has the digital convenience of using the tools you already have with you, but the intentionality and anticipation of a physical letter.",
+        "Simply share your virtual mailbox address and someone can easily write letters that will route through a simulated network and end up in your mailbox in 3-5 days."
     ],
     highlights: [
-
+        "Realistic USPS letter routing",
+        "Handwritten letters with drawing tools",
+        "Synced with Signin with Apple with no details shared"
     ],
     assets: [],
-    tech: [],
+    tech: ["SwiftUI", "MVVM+C", "Server Based"],
     links: [
     ],
     featured: true,
