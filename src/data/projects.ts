@@ -40,7 +40,7 @@ export const projects: Project[] = [
     tech: ["SwiftUI", "iCloud"],
     links: [
       {
-        label: "Download on App Store",
+        label: "Download on the App Store",
         href: "https://apps.apple.com/us/app/lab-assistant-darkroom-timer/id6754861810",
         kind: "primary",
       },
@@ -67,7 +67,7 @@ export const projects: Project[] = [
     tech: ["GameKit", "Multipeer State Management", "View Routing"],
     links: [
       {
-        label: "Download on App Store",
+        label: "Download on the App Store",
         href: "https://apps.apple.com/us/app/hide-seek-play-anywhere/id6745705866",
         kind: "primary",
       },
@@ -95,7 +95,7 @@ export const projects: Project[] = [
     tech: ["WidgetKit", "Swift", "Vapor", "Cloudflare Tunnels"],
     links: [
       {
-        label: "Download on App Store",
+        label: "Download on the App Store",
         href: "https://apps.apple.com/us/app/map-timer/id6744300752",
         kind: "primary",
       },
@@ -128,7 +128,7 @@ export const projects: Project[] = [
     tech: ["SwiftUI", "iOS", "SwiftData"],
     links: [
       {
-        label: "Download on App Store",
+        label: "Download on the App Store",
         href: "https://apps.apple.com/us/app/counter-tallying-app/id1638375914",
         kind: "primary",
       },
@@ -208,7 +208,7 @@ export const projects: Project[] = [
     tech: ["SwiftUI", "Apple Intelligence", "Liquid Glass"],
     links: [
       {
-        label: "Download on App Store",
+        label: "Download on the App Store",
         href: "https://apps.apple.com/us/app/recall-minimal-flashcards/id6756734270",
         kind: "primary",
       },
@@ -234,7 +234,7 @@ export const projects: Project[] = [
     tech: ["Illustration", "iMessage stickers"],
     links: [
       {
-        label: "Download on App Store",
+        label: "Download on the App Store",
         href: "https://apps.apple.com/us/app/cosmic-chaos-alien-stickers/id6748267870",
         kind: "primary",
       },
@@ -261,7 +261,7 @@ export const projects: Project[] = [
     tech: ["SwiftUI", "iCloud", "macOS menu bar", "iOS"],
     links: [
       {
-        label: "Download on App Store",
+        label: "Download on the App Store",
         href: "https://apps.apple.com/us/app/batteryshare-remote-sync/id6759878234",
         kind: "primary",
       },
@@ -318,7 +318,7 @@ export const projects: Project[] = [
   {
     slug: "postal",
     title: "Penpal",
-    kicker: "Coming Soon",
+    kicker: "Digital letters that take their time",
     summary:
         "A letter based app that routes through a realistic network",
     description: [
@@ -333,6 +333,11 @@ export const projects: Project[] = [
     assets: [],
     tech: ["SwiftUI", "MVVM+C", "Server Based"],
     links: [
+      {
+        label: "Download on the App Store",
+        href: "https://apps.apple.com/us/app/penpal-write-send-letters/id6790878852",
+        kind: "primary",
+      }
     ],
     featured: true,
     relevancyDate: new Date("2026-08-29")
