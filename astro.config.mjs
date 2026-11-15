@@ -2,7 +2,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { defineConfig } from "astro/config";
+import { defineConfig, sessionDrivers } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 
 import cloudflare from "@astrojs/cloudflare";
@@ -31,6 +31,12 @@ const secureboardAppcastPlugin = () => ({
 export default defineConfig({
   vite: {
     plugins: [tailwindcss(), secureboardAppcastPlugin()],
+  },
+
+  // Avoid Cloudflare Workers Builds auto-provisioning a SESSION KV namespace
+  // (fails with 10014 once "portfolio-2-session" already exists).
+  session: {
+    driver: sessionDrivers.memory(),
   },
 
   image: {
