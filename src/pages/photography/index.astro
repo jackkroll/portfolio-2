@@ -1,0 +1,476 @@
+---
+export const prerender = false;
+
+import { env } from "cloudflare:workers";
+import Layout from "../../layouts/Layout.astro";
+import { listPhotoAlbums, uniqueTagValues } from "../../lib/photos";
+
+const result = await listPhotoAlbums(env as Env);
+const albums = result.albums;
+const locations = uniqueTagValues(albums, "location");
+const filmStocks = uniqueTagValues(albums, "filmStock");
+const cameras = uniqueTagValues(albums, "camera");
+const totalPhotos = albums.reduce((sum, album) => sum + album.images.length, 0);
+---
+
+<Layout title="Photography | Jack Kroll" description="Film photography albums from Jack Kroll.">
+	<main class="photography-page bg-base-100">
+		<section class="mx-auto max-w-6xl px-4 py-16 md:px-8">
+			<div class="max-w-3xl">
+				<p class="text-sm font-semibold uppercase tracking-wide text-primary">Photography</p>
+				<h1 class="mt-2 text-4xl font-bold md:text-6xl">Albums</h1>
+				<p class="mt-5 text-lg leading-8 text-base-content/70">
+					Film photos grouped by album. Filter by location, film stock, or camera.
+				</p>
+			</div>
+
+			{!result.ok && (
+				<div class="alert alert-error mt-10" role="alert">
+					<span>{result.error}</span>
+				</div>
+			)}
+
+			{result.ok && !result.configured && (
+				<div class="alert alert-warning mt-10" role="status">
+					<span>{result.reason} Add a sample album to R2 once the bucket and public URL are set.</span>
+				</div>
+			)}
+
+			{result.ok && result.configured && albums.length === 0 && (
+				<div class="alert mt-10" role="status">
+					<span>No albums found yet. Upload folders with images (and optional metadata.json) to the R2 bucket.</span>
+				</div>
+			)}
+
+			{albums.length > 0 && (
+				<>
+					<div
+						id="photo-filters"
+						class="mt-10 flex flex-col gap-3 border border-base-300/80 bg-base-200/40 p-4 md:flex-row md:flex-wrap md:items-end"
+					>
+						<label class="form-control w-full md:max-w-xs">
+							<span class="label-text mb-1 text-xs font-semibold uppercase tracking-wide text-secondary">Location</span>
+							<select class="select select-bordered select-sm w-full" data-filter="location" aria-label="Filter by location">
+								<option value="">All locations</option>
+								{locations.map((value) => <option value={value}>{value}</option>)}
+							</select>
+						</label>
+						<label class="form-control w-full md:max-w-xs">
+							<span class="label-text mb-1 text-xs font-semibold uppercase tracking-wide text-secondary">Film stock</span>
+							<select class="select select-bordered select-sm w-full" data-filter="filmStock" aria-label="Filter by film stock">
+								<option value="">All film stocks</option>
+								{filmStocks.map((value) => <option value={value}>{value}</option>)}
+							</select>
+						</label>
+						<label class="form-control w-full md:max-w-xs">
+							<span class="label-text mb-1 text-xs font-semibold uppercase tracking-wide text-secondary">Camera</span>
+							<select class="select select-bordered select-sm w-full" data-filter="camera" aria-label="Filter by camera">
+								<option value="">All cameras</option>
+								{cameras.map((value) => <option value={value}>{value}</option>)}
+							</select>
+						</label>
+						<button type="button" class="btn btn-ghost btn-sm md:mb-0.5" id="photo-filters-clear">Clear</button>
+						<p class="text-sm text-base-content/60 md:ml-auto md:self-center" id="photo-filter-status">
+							{albums.length} album{albums.length === 1 ? "" : "s"} · {totalPhotos} photo{totalPhotos === 1 ? "" : "s"}
+						</p>
+					</div>
+
+					<div id="photo-albums" class="mt-14 space-y-20">
+						{albums.map((album) => (
+							<section
+								class="photo-album"
+								data-album-location={album.location}
+								data-album-film-stock={album.filmStock}
+								data-album-camera={album.camera}
+							>
+								<header class="mb-8 max-w-3xl">
+									<h2 class="text-3xl font-bold tracking-tight md:text-4xl">{album.title}</h2>
+									{album.description && (
+										<p class="mt-3 text-base leading-7 text-base-content/70 md:text-lg md:leading-8">
+											{album.description}
+										</p>
+									)}
+									<div class="mt-4 flex flex-wrap items-center gap-2">
+										{album.location && <span class="badge badge-outline">{album.location}</span>}
+										{album.filmStock && <span class="badge badge-outline">{album.filmStock}</span>}
+										{album.camera && <span class="badge badge-outline">{album.camera}</span>}
+										<span class="text-sm text-base-content/50">
+											{album.images.length} photo{album.images.length === 1 ? "" : "s"}
+										</span>
+									</div>
+								</header>
+
+								{album.images.length === 0 ? (
+									<p class="text-base-content/60">This album has no images yet.</p>
+								) : (
+									<div class="photo-masonry">
+										{album.images.map((image) => {
+											const label = image.title || image.filename;
+											const alt = image.description
+												? `${label} — ${image.description}`
+												: `${album.title} — ${label}`;
+											return (
+												<button
+													type="button"
+													class="photo-frame group"
+													style={`--photo-aspect: ${image.aspectRatio};`}
+													data-photo
+													data-location={image.location}
+													data-film-stock={image.filmStock}
+													data-camera={image.camera}
+													data-lightbox-src={image.url}
+													data-lightbox-alt={alt}
+													data-lightbox-title={label}
+													data-lightbox-description={image.description}
+													data-lightbox-meta={[image.location, image.filmStock, image.camera].filter(Boolean).join(" · ")}
+													data-matte-enabled={album.matting.enabled ? "1" : "0"}
+													data-matte-color={album.matting.color}
+													data-matte-percent={String(album.matting.percent)}
+													aria-label={`Open ${label}`}
+												>
+													<span class="photo-frame__mat">
+														<img
+															src={image.thumbUrl}
+															data-full-src={image.url}
+															alt={alt}
+															class="photo-frame__img"
+															loading="lazy"
+															decoding="async"
+														/>
+													</span>
+												</button>
+											);
+										})}
+									</div>
+								)}
+							</section>
+						))}
+					</div>
+
+					<p id="photo-empty-filter" class="mt-10 hidden text-base-content/70" role="status">
+						No photos match these filters.
+					</p>
+				</>
+			)}
+		</section>
+	</main>
+
+	<dialog id="photo-lightbox" class="photo-lightbox">
+		<form method="dialog" class="photo-lightbox__scrim">
+			<button aria-label="Close lightbox"></button>
+		</form>
+		<div class="photo-lightbox__stage">
+			<button type="button" class="photo-lightbox__close" id="photo-lightbox-close" aria-label="Close">✕</button>
+			<figure class="photo-lightbox__figure" id="photo-lightbox-figure">
+				<div class="photo-lightbox__mat" id="photo-lightbox-mat">
+					<img id="photo-lightbox-img" src="" alt="" />
+				</div>
+				<figcaption class="photo-lightbox__caption" id="photo-lightbox-caption">
+					<p class="photo-lightbox__title" id="photo-lightbox-title"></p>
+					<p class="photo-lightbox__desc" id="photo-lightbox-desc"></p>
+					<p class="photo-lightbox__meta" id="photo-lightbox-meta"></p>
+				</figcaption>
+			</figure>
+		</div>
+	</dialog>
+</Layout>
+
+<style>
+	.photography-page {
+		background:
+			radial-gradient(ellipse 80% 50% at 10% -10%, oklch(28% 0.04 290 / 0.45), transparent 55%),
+			radial-gradient(ellipse 60% 40% at 90% 0%, oklch(30% 0.05 320 / 0.25), transparent 50%),
+			var(--color-base-100);
+	}
+
+	.photo-masonry {
+		columns: 1;
+		column-gap: 1.25rem;
+	}
+
+	@media (min-width: 640px) {
+		.photo-masonry {
+			columns: 2;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.photo-masonry {
+			columns: 3;
+			column-gap: 1.5rem;
+		}
+	}
+
+	.photo-frame {
+		break-inside: avoid;
+		display: block;
+		width: 100%;
+		margin: 0 0 1.25rem;
+		padding: 0;
+		border: 0;
+		background: transparent;
+		cursor: zoom-in;
+		text-align: left;
+	}
+
+	.photo-frame__mat {
+		display: block;
+		background: oklch(18% 0.01 286);
+		box-shadow:
+			0 1px 0 oklch(100% 0 0 / 0.04) inset,
+			0 18px 40px oklch(0% 0 0 / 0.35);
+		padding: 0.55rem;
+		transition: transform 280ms ease, box-shadow 280ms ease;
+	}
+
+	.photo-frame:hover .photo-frame__mat,
+	.photo-frame:focus-visible .photo-frame__mat {
+		transform: translateY(-2px);
+		box-shadow:
+			0 1px 0 oklch(100% 0 0 / 0.06) inset,
+			0 22px 48px oklch(0% 0 0 / 0.45);
+	}
+
+	.photo-frame:focus-visible {
+		outline: 2px solid var(--color-primary);
+		outline-offset: 4px;
+	}
+
+	.photo-frame__img {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: var(--photo-aspect, 0.75);
+		object-fit: cover;
+		background: oklch(12% 0.005 286);
+	}
+
+	.photo-lightbox {
+		border: 0;
+		padding: 0;
+		max-width: none;
+		max-height: none;
+		width: 100vw;
+		height: 100vh;
+		background: transparent;
+		margin: 0;
+	}
+
+	.photo-lightbox::backdrop {
+		background: oklch(8% 0.01 286 / 0.82);
+		backdrop-filter: blur(8px);
+	}
+
+	.photo-lightbox__scrim {
+		position: absolute;
+		inset: 0;
+	}
+
+	.photo-lightbox__scrim button {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		border: 0;
+		background: transparent;
+		cursor: zoom-out;
+	}
+
+	.photo-lightbox__stage {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		place-items: center;
+		min-height: 100%;
+		padding: 2rem 1rem 3rem;
+		pointer-events: none;
+	}
+
+	.photo-lightbox__close {
+		pointer-events: auto;
+		position: fixed;
+		top: 1rem;
+		right: 1rem;
+		z-index: 2;
+		width: 2.5rem;
+		height: 2.5rem;
+		border: 1px solid oklch(100% 0 0 / 0.18);
+		border-radius: 999px;
+		background: oklch(20% 0.01 286 / 0.7);
+		color: oklch(96% 0 0);
+		cursor: pointer;
+	}
+
+	.photo-lightbox__figure {
+		pointer-events: auto;
+		margin: 0;
+		max-width: min(96vw, 1100px);
+		display: grid;
+		gap: 1rem;
+		justify-items: center;
+	}
+
+	.photo-lightbox__mat {
+		background: #fff;
+		line-height: 0;
+		box-shadow: 0 24px 80px oklch(0% 0 0 / 0.55);
+	}
+
+	.photo-lightbox__mat img {
+		display: block;
+		max-width: min(86vw, 980px);
+		max-height: 72vh;
+		width: auto;
+		height: auto;
+		object-fit: contain;
+	}
+
+	.photo-lightbox__caption {
+		max-width: 42rem;
+		text-align: center;
+		color: oklch(96% 0.001 286);
+	}
+
+	.photo-lightbox__title {
+		margin: 0;
+		font-size: 1.125rem;
+		font-weight: 600;
+	}
+
+	.photo-lightbox__desc,
+	.photo-lightbox__meta {
+		margin: 0.35rem 0 0;
+		color: oklch(96% 0.001 286 / 0.7);
+		font-size: 0.95rem;
+		line-height: 1.5;
+	}
+
+	.photo-lightbox__desc:empty,
+	.photo-lightbox__meta:empty,
+	.photo-lightbox__title:empty {
+		display: none;
+	}
+</style>
+
+<script>
+	const filterRoot = document.getElementById("photo-filters");
+	const albumsRoot = document.getElementById("photo-albums");
+	const emptyFilter = document.getElementById("photo-empty-filter");
+	const status = document.getElementById("photo-filter-status");
+	const clearBtn = document.getElementById("photo-filters-clear");
+	const lightbox = document.getElementById("photo-lightbox") as HTMLDialogElement | null;
+	const lightboxImg = document.getElementById("photo-lightbox-img") as HTMLImageElement | null;
+	const lightboxMat = document.getElementById("photo-lightbox-mat") as HTMLElement | null;
+	const lightboxTitle = document.getElementById("photo-lightbox-title");
+	const lightboxDesc = document.getElementById("photo-lightbox-desc");
+	const lightboxMeta = document.getElementById("photo-lightbox-meta");
+	const lightboxClose = document.getElementById("photo-lightbox-close");
+
+	function selectedFilters() {
+		const get = (name: string) =>
+			(filterRoot?.querySelector(`[data-filter="${name}"]`) as HTMLSelectElement | null)?.value ?? "";
+		return {
+			location: get("location"),
+			filmStock: get("filmStock"),
+			camera: get("camera"),
+		};
+	}
+
+	function applyFilters() {
+		if (!albumsRoot) return;
+		const filters = selectedFilters();
+		const albums = [...albumsRoot.querySelectorAll<HTMLElement>(".photo-album")];
+		let visibleAlbums = 0;
+		let visiblePhotos = 0;
+
+		for (const album of albums) {
+			const photos = [...album.querySelectorAll<HTMLElement>("[data-photo]")];
+			let albumVisible = 0;
+
+			for (const photo of photos) {
+				const matchLocation = !filters.location || photo.dataset.location === filters.location;
+				const matchFilm = !filters.filmStock || photo.dataset.filmStock === filters.filmStock;
+				const matchCamera = !filters.camera || photo.dataset.camera === filters.camera;
+				const show = matchLocation && matchFilm && matchCamera;
+				photo.hidden = !show;
+				if (show) {
+					albumVisible += 1;
+					visiblePhotos += 1;
+				}
+			}
+
+			album.hidden = albumVisible === 0;
+			if (albumVisible > 0) visibleAlbums += 1;
+		}
+
+		if (emptyFilter) emptyFilter.classList.toggle("hidden", visiblePhotos !== 0);
+		if (status) {
+			status.textContent = `${visibleAlbums} album${visibleAlbums === 1 ? "" : "s"} · ${visiblePhotos} photo${visiblePhotos === 1 ? "" : "s"}`;
+		}
+	}
+
+	function applyMatte(target: HTMLElement) {
+		if (!lightboxMat || !lightboxImg) return;
+		const enabled = target.dataset.matteEnabled !== "0";
+		const color = target.dataset.matteColor || "#ffffff";
+		const percent = Number(target.dataset.mattePercent || "20");
+
+		lightboxMat.style.background = enabled ? color : "transparent";
+		lightboxMat.style.padding = "0";
+
+		const applyPadding = () => {
+			if (!enabled) {
+				lightboxMat.style.padding = "0";
+				return;
+			}
+			const shorter = Math.min(lightboxImg.clientWidth, lightboxImg.clientHeight);
+			const pad = Math.max(12, Math.round((shorter * percent) / 100));
+			lightboxMat.style.padding = `${pad}px`;
+		};
+
+		if (lightboxImg.complete && lightboxImg.naturalWidth) {
+			requestAnimationFrame(applyPadding);
+		} else {
+			lightboxImg.addEventListener("load", () => requestAnimationFrame(applyPadding), { once: true });
+		}
+	}
+
+	function openLightbox(target: HTMLElement) {
+		if (!lightbox || !lightboxImg) return;
+		lightboxImg.src = target.dataset.lightboxSrc ?? "";
+		lightboxImg.alt = target.dataset.lightboxAlt ?? "";
+		if (lightboxTitle) lightboxTitle.textContent = target.dataset.lightboxTitle ?? "";
+		if (lightboxDesc) lightboxDesc.textContent = target.dataset.lightboxDescription ?? "";
+		if (lightboxMeta) lightboxMeta.textContent = target.dataset.lightboxMeta ?? "";
+		applyMatte(target);
+		lightbox.showModal();
+	}
+
+	filterRoot?.addEventListener("change", applyFilters);
+	clearBtn?.addEventListener("click", () => {
+		filterRoot?.querySelectorAll("select").forEach((el) => {
+			(el as HTMLSelectElement).value = "";
+		});
+		applyFilters();
+	});
+
+	albumsRoot?.addEventListener("click", (event) => {
+		const target = (event.target as HTMLElement | null)?.closest<HTMLElement>("[data-lightbox-src]");
+		if (!target) return;
+		openLightbox(target);
+	});
+
+	albumsRoot?.addEventListener(
+		"error",
+		(event) => {
+			const img = event.target;
+			if (!(img instanceof HTMLImageElement)) return;
+			const full = img.dataset.fullSrc;
+			if (!full || img.src === full) return;
+			img.src = full;
+		},
+		true,
+	);
+
+	lightboxClose?.addEventListener("click", () => lightbox?.close());
+</script>

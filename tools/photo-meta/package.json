@@ -1,0 +1,23 @@
+{
+  "name": "photo-meta",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k \"npm:server\" \"npm:client\"",
+    "start": "npm run dev",
+    "server": "tsx server.ts",
+    "client": "vite --port 5174 --strictPort"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.19.0",
+    "hono": "^4.10.0",
+    "image-size": "^2.1.0",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.3"
+  }
+}

@@ -1,0 +1,23 @@
+{
+	"compatibility_date": "2026-05-19",
+	"compatibility_flags": ["global_fetch_strictly_public"],
+	"name": "portfolio",
+	"main": "@astrojs/cloudflare/entrypoints/server",
+	"assets": {
+		"directory": "./dist",
+		"binding": "ASSETS"
+	},
+	"r2_buckets": [
+		{
+			"binding": "PHOTOS",
+			"bucket_name": "img",
+			"remote": true
+		}
+	],
+	"vars": {
+		"PUBLIC_R2_URL": "https://cdn.jackk.dev"
+	},
+	"observability": {
+		"enabled": true
+	}
+}
